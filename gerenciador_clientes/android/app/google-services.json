@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "730716051485",
+    "project_id": "bd-gerenciador-r",
+    "storage_bucket": "bd-gerenciador-r.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730716051485:android:15045391d75941b1b2cef4",
+        "android_client_info": {
+          "package_name": "com.example.gerenciador_clientes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB61e48bCSjLKCB7PIS6LvAaA8quU3ZEA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
