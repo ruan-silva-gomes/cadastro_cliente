@@ -1,4 +1,4 @@
-//importe necessário do Material app
+// Importe nescessario do Material APP
 import 'package:flutter/material.dart';
 
 class Cliente {
@@ -6,46 +6,56 @@ class Cliente {
   final String email;
   final String senha;
 
-  //Construtor do cliente
-  Cliente({
-    required this.nome,
-    required this.email,
-    required this.senha,
-  });
+  // Contrutor da classe Cliente
+  Cliente({required this.nome, required this.email, required this.senha});
+
   @override
   String toString() {
-    return 'Cliente: $nome, Email: $email';
+    return 'Cliente(nome: $nome, email: $email, senha: $senha)';
   }
 }
 
 class GerenciadorClientes {
-  //variavel estatica que guarda a unica copia desta classe 
+  // variavel estatica que guarda a unica copia desta classe
   static final GerenciadorClientes _instancia = GerenciadorClientes._interno();
-  //inpede a crianção de novas instancias
+
+  // Impede a crianção de multiplas instancias
   GerenciadorClientes._interno();
-//sempre retorna a isntancia existente
-  factory GerenciadorClientes() => _instancia;
-//lista <ul> que armazena todos clientes cadastrados
-  final List<Cliente>_clientes = [];
 
-  List<Cliente> get cliente => List.unmodifiable(_clientes);
-
-  bool cadastrar(Cliente cliente){
-    //vamos checar se ja existe um email cadastrado
-    if(_clientes.any((c) => c.email.toLowerCase() == cliente.email.toLowerCase())){
-      print('Erro: email ${cliente.email} ja cadastrado');
-      return false;//Cadastro falhou
-    }
-    _clientes.add(cliente); //adiciona o cliente
-    print('Novo cliente cadastrado: ${cliente.nome}');
-    return true; //Cadatrooooouuu
+  //  sempre retorna a mesma instancia
+  factory GerenciadorClientes() {
+    return _instancia;
   }
-  Cliente ? login(String email, String senha){
+
+  // lista ul que armazena todos os clientes cadastrados
+  final List<Cliente> _clientes = [];
+
+  //para acessar a lista de clientes (retorna uma copia imutavel)
+  List<Cliente> get clientes =>
+      List.unmodifiable(_clientes); //unmodifiable sem modifica a lista
+
+  //tentar cadastrar um novo cliente
+  bool cadastrar(Cliente cliente) {
+    // vamos checar se ja existe um cliente com o mesmo email
+    if (_clientes.any(
+      (c) => c.email.toLowerCase() == cliente.email.toLowerCase(),
+    )) {
+      print(
+        "Erro: Ja existe um cliente cadastrado com este email ${cliente.email}",
+      );
+      return false; // cadastro falhou
+    }
+    _clientes.add(cliente); //vou adicionar o cliente
+    print("Cliente cadastrado com sucesso: ${cliente.nome}");
+    return true; //cadastro bem sucedido
+  }
+
+  Cliente? login(String email, String senha){
     return _clientes.firstWhere(
-       //é uma função anônima
-       // o c representa cada elemento(cada cliente) da lista _clientes 
+      // é uma função anonima representa cada cliente na lista dado o nome de (c)
+      // o c representa  elemento (cada cliente) da lista _clientes
       (c) => c.email.toLowerCase() == email.toLowerCase() && c.senha == senha,
-      orElse: () => Null as Cliente, //retorna nulo se nao encontra os dados
+      orElse: () => null as Cliente, //ele retorna null se nao encontrar
     );
   }
 }
